@@ -3,6 +3,7 @@ use clap::App;
 use clap::Arg;
 use clap::SubCommand;
 use std::env;
+use std::path::Path;
 use std::sync::Arc;
 use std::sync::Mutex;
 use weresocool::manager::prepare_render_outside;
@@ -60,13 +61,9 @@ fn watch(filename: String, working_path: String, render_manager: Arc<Mutex<Rende
         let (tx, rx) = channel();
 
         let mut watcher = watcher(tx, Duration::from_millis(1000)).unwrap();
+        let path = Path::new(&working_path).join(Path::new(&filename));
 
-        watcher
-            .watch(
-                "/Users/user1/code/weresocool_cmd/song.socool",
-                RecursiveMode::Recursive,
-            )
-            .unwrap();
+        watcher.watch(path, RecursiveMode::Recursive).unwrap();
         match rx.recv() {
             Ok(_event) => {
                 // println!("{:?}", event);
