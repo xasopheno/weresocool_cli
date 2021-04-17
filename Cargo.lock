@@ -1739,7 +1739,6 @@ dependencies = [
  "assert_cmd",
  "clap",
  "notify",
- "portaudio",
  "predicates",
  "thiserror",
  "weresocool",

@@ -15,3 +15,4 @@ weresocool = { path = "../weresocool" }
 weresocool_instrument = { path = "../weresocool/instrument" }
 weresocool_error = { path = "../weresocool/error" }
 thiserror = "1.0.24"
+portaudio = "0.7.0"
