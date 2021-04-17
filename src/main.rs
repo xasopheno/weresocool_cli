@@ -5,6 +5,7 @@ use clap::SubCommand;
 use notify::{watcher, Error as NotifyError, RecursiveMode, Watcher};
 use std::env;
 use std::path::Path;
+use std::path::PathBuf;
 use std::sync::mpsc::channel;
 use std::sync::Arc;
 use std::sync::Mutex;
@@ -61,7 +62,7 @@ fn main() -> Result<(), Error> {
                 .values_of("file")
                 .ok_or(Error::Message("No value of file".to_string()))?
                 .collect::<Vec<_>>();
-            play_file(filenames[0].to_string(), cwd.display().to_string())?;
+            play_file(filenames[0].to_string(), cwd)?;
         }
         _ => unimplemented!(),
     }
@@ -70,7 +71,7 @@ fn main() -> Result<(), Error> {
 
 fn watch(
     filename: String,
-    working_path: String,
+    working_path: PathBuf,
     render_manager: Arc<Mutex<RenderManager>>,
 ) -> Result<(), Error> {
     thread::spawn(move || -> Result<(), Error> {
@@ -82,7 +83,7 @@ fn watch(
 
             watcher.watch(path, RecursiveMode::NonRecursive)?;
             match rx.recv() {
-                Ok(event) => {
+                Ok(_event) => {
                     // println!("{:?}", event);
                     let render_voices = match prepare_render_outside(
                         Filename(&filename),
@@ -105,7 +106,7 @@ fn watch(
     Ok(())
 }
 
-fn play_file(filename: String, working_path: String) -> Result<(), Error> {
+fn play_file(filename: String, working_path: PathBuf) -> Result<(), Error> {
     let render_voices = prepare_render_outside(Filename(&filename), Some(working_path.clone()));
 
     let render_manager = Arc::new(Mutex::new(RenderManager::init(render_voices?)));
