@@ -1,5 +1,6 @@
 mod test;
 use clap::App;
+use clap::AppSettings;
 use clap::Arg;
 use clap::SubCommand;
 use notify::{watcher, Error as NotifyError, RecursiveMode, Watcher};
@@ -14,6 +15,7 @@ use std::time::Duration;
 use thiserror::Error;
 use weresocool::manager::prepare_render_outside;
 use weresocool::portaudio::real_time_render_manager;
+use weresocool::ui::were_so_cool_logo;
 use weresocool::{interpretable::InputType::Filename, manager::RenderManager};
 use weresocool_error::Error as WscError;
 
@@ -31,29 +33,73 @@ pub enum Error {
     Message(String),
 }
 
-// use weresocool::ui::were_so_cool_logo;
-
-fn main() -> Result<(), Error> {
-    // were_so_cool_logo();
-    let cwd = env::current_dir()?;
-
-    let matches = App::new("WereSoCool CLI")
+fn app() -> clap::App<'static, 'static> {
+    App::new("WereSoCool CLI")
         .version("1.0")
         .author("Danny Meyer")
-        .about("Does cool things")
+        .about("Make cool sounds and impress your friends/pets/plants.")
+        .setting(AppSettings::ColoredHelp)
         .subcommand(
-            SubCommand::with_name("play")
-                .about("Play a song")
-                .help("play .socool file")
+            SubCommand::with_name("play").help("Play .socool file").arg(
+                Arg::with_name("file")
+                    .multiple(false)
+                    .number_of_values(1)
+                    .index(1)
+                    .help("filename"),
+            ),
+        )
+        .subcommand(
+            SubCommand::with_name("print")
+                // .help("Print .socool file to mp3 or wav")
                 .arg(
                     Arg::with_name("file")
+                        .value_name("FILE")
                         .multiple(false)
                         .number_of_values(1)
                         .index(1)
-                        .help("play .socool file"),
+                        .long_help("asdflsdlfksdsdkfhjasdfkhjaf")
+                        .help("filename"),
+                )
+                .arg(
+                    Arg::with_name("mp3")
+                        .long("mp3")
+                        .takes_value(false)
+                        .help("print mp3 file"),
+                )
+                .arg(
+                    Arg::with_name("wav")
+                        .long("wav")
+                        .takes_value(false)
+                        .help("print wav file"),
+                )
+                .arg(
+                    Arg::with_name("csv")
+                        .long("csv")
+                        .takes_value(false)
+                        .help("print csv file"),
+                )
+                .arg(
+                    Arg::with_name("sound")
+                        .long("sound")
+                        .short("s")
+                        .takes_value(false)
+                        .help("print sound file"),
+                )
+                .arg(
+                    Arg::with_name("all")
+                        .long("all")
+                        .short("a")
+                        .takes_value(false)
+                        .help("print all file types"),
                 ),
         )
-        .get_matches();
+}
+
+fn main() -> Result<(), Error> {
+    were_so_cool_logo();
+    let cwd = env::current_dir()?;
+
+    let matches = app().get_matches();
 
     match matches.subcommand() {
         ("play", play_args) => {
@@ -79,6 +125,7 @@ fn watch(
             let (tx, rx) = channel();
 
             let mut watcher = watcher(tx, Duration::from_millis(10))?;
+
             let path = Path::new(&working_path).join(Path::new(&filename));
 
             watcher.watch(path, RecursiveMode::NonRecursive)?;
