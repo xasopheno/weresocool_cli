@@ -11,5 +11,7 @@ assert_cmd = "1.0.3"
 clap = "2.33.3"
 notify = "4.0.15"
 predicates = "1.0.7"
-weresocool = { path = "../WereSoCool" }
-weresocool_instrument = { path = "../WereSoCool/instrument" }
+weresocool = { path = "../weresocool" }
+weresocool_instrument = { path = "../weresocool/instrument" }
+weresocool_error = { path = "../weresocool/error" }
+thiserror = "1.0.24"
