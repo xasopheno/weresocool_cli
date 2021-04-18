@@ -3,6 +3,11 @@ play:
 	export RUST_MIN_STACK=8388608 &&\
 	cargo run --release -- play song.socool
 
+print: 
+	ulimit -s 32768 &&\
+	export RUST_MIN_STACK=8388608 &&\
+	cargo run --release -- print song.socool --all
+
 dev: 
 	ulimit -s 32768 &&\
 	export RUST_MIN_STACK=8388608 &&\
