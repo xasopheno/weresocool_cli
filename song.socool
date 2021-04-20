@@ -1,4 +1,4 @@
-{ f: 311.127, l: 1, g: 1/50, p: 0 }
+{ f: 311.127, l: 1, g: 1/2, p: 0 }
 
 thing1 = {
   O[
@@ -7,31 +7,31 @@ thing1 = {
   ]
   | Seq [
     Fm 1/2, 
-    -- Fm 4/5, Fm 3/4, Fm 7/12
+    Fm 4/5, Fm 3/4, Fm 7/12
   ]
 }
 
 main = {
   Overlay [
     thing1,
-    -- O[
-      -- (1/1, 2, 1, 1),
-      -- (1/1, 0, 1, -1),
-      -- (1/2, 0, 1, 0),
-      -- (1/4, 0, 1, 0),
-    -- ]
-
-    -- | Seq [Fm 3, Fm 2] | FitLength thing1, 
-    -- Overlay [
-      -- Fm 2 | thing1 | Repeat 2 | Reverse | FitLength thing1,
-      -- Fm 3 | thing1 | Repeat 3 | Reverse | FitLength thing1,
-      -- Fm 4 | thing1 | Repeat 4 | Reverse | FitLength thing1,
-      -- Fm 5 | thing1 | Repeat 5 | Reverse | FitLength thing1,
-      -- Fm 6 | thing1 | Repeat 6 | Reverse | FitLength thing1,
-      -- Fm 7 | thing1 | Repeat 7 | Reverse | FitLength thing1,
-      -- Fm 8 | thing1 | Repeat 8 | Reverse | FitLength thing1,
-      -- Fm 9 | thing1 | Repeat 9 | Reverse | FitLength thing1,
-    -- ] | Gm 1/8
+    O[ 
+      (1/1, 2, 1, 1),
+      (1/1, 0, 1, -1),
+      (1/2, 0, 1, 0),
+      (1/4, 0, 1, 0),
+    ]
+    | Seq [Fm 3, Fm 2] | FitLength thing1, 
+      Overlay [
+        -- Fm 2 | thing1 | Repeat 2 | Reverse | FitLength thing1,
+        -- Fm 3 | thing1 | Repeat 3 | Reverse | FitLength thing1,
+        Fm 4 | thing1 | Repeat 4 | Reverse | FitLength thing1,
+        -- Fm 5 | thing1 | Repeat 5 | Reverse | FitLength thing1,
+        Fm 6 | thing1 | Repeat 6 | Reverse | FitLength thing1,
+        Fm 7 | thing1 | Repeat 7 | Reverse | FitLength thing1,
+        -- Fm 8 | thing1 | Repeat 8 | Reverse | FitLength thing1,
+        -- Fm 9 | thing1 | Repeat 9 | Reverse | FitLength thing1,
+      ] | Gm 1/8
   ]
+  | Lm 1/3
   -- | Repeat 2
 }

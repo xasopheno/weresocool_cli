@@ -23,12 +23,27 @@ pub fn play(play_args: Option<&ArgMatches>, cwd: PathBuf) -> Result<(), Error> {
 }
 
 fn play_file(filename: String, working_path: PathBuf) -> Result<(), Error> {
+    let (tx, rx) = std::sync::mpsc::channel::<bool>();
     let render_voices = prepare_render_outside(Filename(&filename), Some(working_path.clone()));
 
-    let render_manager = Arc::new(Mutex::new(RenderManager::init(render_voices?)));
+    let render_manager = Arc::new(Mutex::new(RenderManager::init(
+        render_voices?,
+        Some(tx),
+        true,
+    )));
     watch(filename, working_path, render_manager.clone())?;
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
 
     stream.start()?;
-    loop {}
+
+    match rx.recv() {
+        Ok(v) => {
+            dbg!(v);
+            Ok(())
+        }
+        Err(e) => {
+            dbg!(e);
+            Err(Error::Message("error".to_string()))
+        }
+    }
 }
