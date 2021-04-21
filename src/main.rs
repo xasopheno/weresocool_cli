@@ -3,6 +3,10 @@ mod play;
 mod print;
 mod test;
 mod watch;
+use crate::play::{
+    play,
+    Play::{Once, Watch},
+};
 use notify::Error as NotifyError;
 use std::env;
 use thiserror::Error;
@@ -30,7 +34,8 @@ fn main() -> Result<(), Error> {
     let matches = app::app().get_matches();
 
     match matches.subcommand() {
-        ("play", play_args) => play::play(play_args, cwd)?,
+        ("play", play_args) => play(play_args, cwd, Once)?,
+        ("watch", play_args) => play(play_args, cwd, Watch)?,
 
         ("print", print_args) => print::print(print_args)?,
         _ => unimplemented!(),

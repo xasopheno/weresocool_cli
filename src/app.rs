@@ -16,6 +16,17 @@ pub fn app() -> clap::App<'static, 'static> {
             ),
         )
         .subcommand(
+            SubCommand::with_name("watch")
+                .help("Develop .socool file")
+                .arg(
+                    Arg::with_name("file")
+                        .multiple(false)
+                        .number_of_values(1)
+                        .index(1)
+                        .help("filename"),
+                ),
+        )
+        .subcommand(
             SubCommand::with_name("print")
                 .usage("weresocool print [FILENAME] [FLAGS]")
                 // .help("Print .socool file to mp3 or wav")
