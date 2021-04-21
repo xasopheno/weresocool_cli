@@ -1671,6 +1671,21 @@ checksum = "d9a543ae66aa233d14bb765ed9af4a33e81b8b58d1584cf1b47ff8cd0b9e4489"
 
 [[package]]
 name = "weresocool"
+version = "0.1.0"
+dependencies = [
+ "assert_cmd",
+ "clap",
+ "notify",
+ "portaudio",
+ "predicates",
+ "thiserror",
+ "weresocool 0.6.0",
+ "weresocool_error",
+ "weresocool_instrument",
+]
+
+[[package]]
+name = "weresocool"
 version = "0.6.0"
 dependencies = [
  "bytes",
@@ -1730,21 +1745,6 @@ dependencies = [
  "serde",
  "weresocool_error",
  "weresocool_shared",
-]
-
-[[package]]
-name = "weresocool_cmd"
-version = "0.1.0"
-dependencies = [
- "assert_cmd",
- "clap",
- "notify",
- "portaudio",
- "predicates",
- "thiserror",
- "weresocool",
- "weresocool_error",
- "weresocool_instrument",
 ]
 
 [[package]]

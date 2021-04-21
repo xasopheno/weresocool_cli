@@ -1,5 +1,5 @@
 [package]
-name = "weresocool_cmd"
+name = "weresocool"
 version = "0.1.0"
 authors = ["Danny Meyer <danny@xasopheno.com>"]
 edition = "2018"

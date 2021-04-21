@@ -21,4 +21,4 @@ dev:
 test: 
 	ulimit -s 32768 &&\
 	export RUST_MIN_STACK=8388608 &&\
-	cargo watch --exec "test" --ignore test_data/*
+	cargo watch --exec "test" 
