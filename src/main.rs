@@ -36,7 +36,6 @@ fn main() -> Result<(), Error> {
     match matches.subcommand() {
         ("play", play_args) => play(play_args, cwd, Once)?,
         ("watch", play_args) => play(play_args, cwd, Watch)?,
-
         ("print", print_args) => print::print(print_args)?,
         _ => unimplemented!(),
     }

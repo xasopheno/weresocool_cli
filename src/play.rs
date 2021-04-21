@@ -47,13 +47,17 @@ fn play_once(render_voices: Vec<RenderVoice>) -> Result<(), Error> {
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
 
     stream.start()?;
+    // rx.recv blocks until it receives data and
+    // after that, the function will complete,
+    // stream will be dropped, and the application
+    // will exit.
     match rx.recv() {
-        Ok(_) => Ok(()),
+        Ok(_) => {}
         Err(e) => {
-            dbg!(e);
-            Err(Error::Message("error".to_string()))
+            println!("{}", e);
+            std::process::exit(1);
         }
-    }?;
+    };
     Ok(())
 }
 
@@ -67,5 +71,4 @@ fn play_watch(
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
     stream.start()?;
     loop {}
-    // Ok(())
 }
