@@ -27,11 +27,18 @@ mod test {
             .arg("--csv")
             .assert()
             .success();
+
+        let expected_filename = "test_data/play.socool.csv";
+        let written_filename = "play.socool.csv";
+        assert_same_file_contents(expected_filename, written_filename)
     }
 
-    // let buffered = BufReader::new(input);
+    fn assert_same_file_contents(expected_filename: &str, written_filename: &str) {
+        let expected = std::fs::read_to_string(expected_filename)
+            .expect("Something went wrong reading the file");
+        let written = std::fs::read_to_string(written_filename)
+            .expect("Something went wrong reading the file");
 
-    // for line in buffered.lines() {
-    // println!("{}", line?);
-    // }
+        assert!(expected == written);
+    }
 }

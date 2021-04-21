@@ -14,9 +14,11 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
     };
     let filename = args
         .values_of("file")
-        .ok_or(Error::Message(
-            "Filename required. Usage: weresocool print [FILENAME] [FLAGS]".to_string(),
-        ))?
+        .ok_or_else(|| {
+            Error::Message(
+                "Filename required. Usage: weresocool print [FILENAME] [FLAGS]".to_string(),
+            )
+        })?
         .collect::<Vec<_>>()
         .first()
         .expect("No Filename")
