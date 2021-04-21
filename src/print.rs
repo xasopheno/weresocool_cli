@@ -21,6 +21,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         .first()
         .expect("No Filename")
         .to_string();
+
     println!("Filename: {}", filename);
     if should_print(&["all", "wav", "sound"]) {
         println!("{}", "printing .wav...");
