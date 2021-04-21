@@ -3,7 +3,7 @@ mod test {
     use assert_cmd::Command;
 
     #[test]
-    fn it_plays_a_file() {
+    fn it_plays_a_cool_file() {
         let mut cmd = Command::new("cargo");
 
         cmd.arg("run")
@@ -30,6 +30,24 @@ mod test {
 
         let expected_filename = "test_data/play.socool.csv";
         let written_filename = "play.socool.csv";
+        assert_same_file_contents(expected_filename, written_filename)
+    }
+
+    #[test]
+    fn it_prints_a_json() {
+        let mut cmd = Command::new("cargo");
+
+        cmd.arg("run")
+            .arg("--release")
+            .arg("--")
+            .arg("print")
+            .arg("test_data/play.socool")
+            .arg("--json")
+            .assert()
+            .success();
+
+        let expected_filename = "test_data/play.socool.json";
+        let written_filename = "play.socool.json";
         assert_same_file_contents(expected_filename, written_filename)
     }
 
