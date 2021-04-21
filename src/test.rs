@@ -11,15 +11,13 @@ mod test {
         cwd.push("song.socool");
         // let expected_filepath = cwd.display();
 
-        let assert = cmd
-            .arg("run")
+        cmd.arg("run")
             .arg("--release")
             .arg("--")
             .arg("play")
-            .arg("song.socool")
-            .assert();
-
-        assert.success();
+            .arg("test_data/play.socool")
+            .assert()
+            .success();
         // .stdout(format!("Playing: {}\n", expected_filepath.to_string()));
     }
 }

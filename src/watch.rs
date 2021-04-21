@@ -37,6 +37,7 @@ pub fn watch(
                             None
                         }
                     };
+
                     if let Some(voices) = render_voices {
                         render_manager.lock().unwrap().push_render(voices);
                     }

@@ -29,6 +29,7 @@ pub fn play(play_args: Option<&ArgMatches>, cwd: PathBuf, play: Play) -> Result<
 }
 
 fn play_file(filename: String, working_path: PathBuf, play: Play) -> Result<(), Error> {
+    dbg!(&filename, &working_path);
     let render_voices = prepare_render_outside(Filename(&filename), Some(working_path.clone()));
 
     match play {
@@ -41,7 +42,9 @@ fn play_once(render_voices: Vec<RenderVoice>) -> Result<(), Error> {
     let (tx, rx) = std::sync::mpsc::channel::<bool>();
     let render_manager = Arc::new(Mutex::new(RenderManager::init(
         render_voices,
+        // Option<KillChannel>
         Some(tx),
+        // play once
         true,
     )));
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
