@@ -29,7 +29,6 @@ pub fn play(play_args: Option<&ArgMatches>, cwd: PathBuf, play: Play) -> Result<
 }
 
 fn play_file(filename: String, working_path: PathBuf, play: Play) -> Result<(), Error> {
-    dbg!(&filename, &working_path);
     let render_voices = prepare_render_outside(Filename(&filename), Some(working_path.clone()));
 
     match play {
