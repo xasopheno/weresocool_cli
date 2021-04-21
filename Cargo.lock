@@ -1675,6 +1675,7 @@ version = "0.1.0"
 dependencies = [
  "assert_cmd",
  "clap",
+ "hound",
  "notify",
  "portaudio",
  "predicates",

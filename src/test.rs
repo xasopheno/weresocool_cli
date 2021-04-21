@@ -51,6 +51,35 @@ mod test {
         assert_same_file_contents(expected_filename, written_filename)
     }
 
+    // #[test]
+    // fn it_prints_a_wav() {
+    // let mut cmd = Command::new("cargo");
+
+    // cmd.arg("run")
+    // .arg("--release")
+    // .arg("--")
+    // .arg("print")
+    // .arg("test_data/play.socool")
+    // .arg("--wav")
+    // .assert()
+    // .success();
+
+    // let expected_filename = "test_data/play.wav";
+    // let written_filename = "play.wav";
+    // assert_same_file_contents(expected_filename, written_filename)
+    // }
+
+    // fn assert_same_wav_file_contents(expected_filename: &str, written_filename: &str) {
+    // let expected_reader = hound::WavReader::open(expected_filename)
+    // .expect("Something went wrong reading the file");
+    // let written_reader = hound::WavReader::open(written_filename)
+    // .expect("Something went wrong reading the file");
+
+    // for (written_sample, expected_sample) in
+
+    // assert!(expected == written);
+    // }
+
     fn assert_same_file_contents(expected_filename: &str, written_filename: &str) {
         let expected = std::fs::read_to_string(expected_filename)
             .expect("Something went wrong reading the file");
