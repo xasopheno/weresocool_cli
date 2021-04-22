@@ -1,6 +1,5 @@
 use crate::Error;
 use clap::ArgMatches;
-use std::path::Path;
 use std::path::PathBuf;
 use weresocool::generation::{RenderType, WavType};
 use weresocool::interpretable::InputType;
@@ -50,7 +49,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         InputType::Filename(&filename).make(
             RenderType::Csv1d {
                 cli: true,
-                output_dir: Some(output_dir),
+                output_dir,
             },
             None,
         )?;
