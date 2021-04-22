@@ -31,6 +31,13 @@ pub fn app() -> clap::App<'static, 'static> {
             SubCommand::with_name("print")
                 .usage("weresocool print [FILENAME] [FLAGS]")
                 .arg(
+                    Arg::with_name("output_dir")
+                        .long("output_dir")
+                        .value_name("OUTPUT_DIR")
+                        .number_of_values(1)
+                        .help("output_dir"),
+                )
+                .arg(
                     Arg::with_name("file")
                         .value_name("FILENAME")
                         .multiple(false)

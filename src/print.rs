@@ -1,5 +1,7 @@
 use crate::Error;
 use clap::ArgMatches;
+use std::path::Path;
+use std::path::PathBuf;
 use weresocool::generation::{RenderType, WavType};
 use weresocool::interpretable::InputType;
 use weresocool::interpretable::Interpretable;
@@ -24,6 +26,12 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         .expect("No Filename")
         .to_string();
 
+    let mut output_dir = PathBuf::new();
+    match args.values_of("output_dir") {
+        Some(values) => output_dir.push(values.collect::<Vec<_>>().first().expect("No Filename")),
+        None => {}
+    };
+
     println!("Filename: {}", filename);
     if should_print(&["all", "wav", "sound"]) {
         println!("{}", "printing .wav...");
@@ -39,7 +47,13 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
     }
     if should_print(&["all", "csv"]) {
         println!("{}", "printing .csv...");
-        InputType::Filename(&filename).make(RenderType::Csv1d, None)?;
+        InputType::Filename(&filename).make(
+            RenderType::Csv1d {
+                cli: true,
+                output_dir: Some(output_dir),
+            },
+            None,
+        )?;
         printed.push("csv")
     }
     if should_print(&["all", "json"]) {
