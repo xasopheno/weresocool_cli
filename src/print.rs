@@ -35,13 +35,25 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
     if should_print(&["all", "wav", "sound"]) {
         println!("{}", "printing .wav...");
 
-        InputType::Filename(&filename).make(RenderType::Wav(WavType::Wav { cli: true }), None)?;
+        InputType::Filename(&filename).make(
+            RenderType::Wav(WavType::Wav {
+                cli: true,
+                output_dir: output_dir.clone(),
+            }),
+            None,
+        )?;
         printed.push("wav")
     }
     if should_print(&["all", "mp3", "sound"]) {
         println!("{}", "printing .mp3...");
 
-        InputType::Filename(&filename).make(RenderType::Wav(WavType::Mp3 { cli: true }), None)?;
+        InputType::Filename(&filename).make(
+            RenderType::Wav(WavType::Mp3 {
+                cli: true,
+                output_dir: output_dir.clone(),
+            }),
+            None,
+        )?;
         printed.push("mp3")
     }
     if should_print(&["all", "csv"]) {
@@ -67,7 +79,13 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         printed.push("json")
     }
     if printed.is_empty() {
-        InputType::Filename(&filename).make(RenderType::Wav(WavType::Wav { cli: true }), None)?;
+        InputType::Filename(&filename).make(
+            RenderType::Wav(WavType::Wav {
+                cli: true,
+                output_dir,
+            }),
+            None,
+        )?;
         println!("{}", "printing .wav (default)...");
     }
 

@@ -65,11 +65,13 @@ mod test {
             .arg("print")
             .arg("test_data/play.socool")
             .arg("--wav")
+            .arg("--output_dir")
+            .arg("/tmp")
             .assert()
             .success();
 
         let expected_filename = "test_data/play.wav";
-        let written_filename = "play.wav";
+        let written_filename = "/tmp/play.wav";
         assert_same_wav_file(expected_filename, written_filename)
             .expect("Wave files are no the same");
     }
@@ -83,12 +85,14 @@ mod test {
             .arg("--")
             .arg("print")
             .arg("test_data/play.socool")
+            .arg("--output_dir")
+            .arg("/tmp")
             .arg("--mp3")
             .assert()
             .success();
 
         let expected_filename = "test_data/play.mp3";
-        let written_filename = "play.mp3";
+        let written_filename = "/tmp/play.mp3";
         assert_same_bytes(expected_filename, written_filename);
     }
 
