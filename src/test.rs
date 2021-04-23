@@ -24,12 +24,14 @@ mod test {
             .arg("--")
             .arg("print")
             .arg("test_data/play.socool")
+            .arg("--output_dir")
+            .arg("/tmp")
             .arg("--csv")
             .assert()
             .success();
 
         let expected_filename = "test_data/play.socool.csv";
-        let written_filename = "play.socool.csv";
+        let written_filename = "/tmp/play.socool.csv";
         assert_same_file_contents(expected_filename, written_filename)
     }
 
@@ -42,12 +44,14 @@ mod test {
             .arg("--")
             .arg("print")
             .arg("test_data/play.socool")
+            .arg("--output_dir")
+            .arg("/tmp")
             .arg("--json")
             .assert()
             .success();
 
         let expected_filename = "test_data/play.socool.json";
-        let written_filename = "play.socool.json";
+        let written_filename = "/tmp/play.socool.json";
         assert_same_file_contents(expected_filename, written_filename)
     }
 

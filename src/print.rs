@@ -49,7 +49,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         InputType::Filename(&filename).make(
             RenderType::Csv1d {
                 cli: true,
-                output_dir,
+                output_dir: output_dir.clone(),
             },
             None,
         )?;
@@ -57,7 +57,13 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
     }
     if should_print(&["all", "json"]) {
         println!("{}", "printing .json...");
-        InputType::Filename(&filename).make(RenderType::Json4d, None)?;
+        InputType::Filename(&filename).make(
+            RenderType::Json4d {
+                cli: true,
+                output_dir: output_dir.clone(),
+            },
+            None,
+        )?;
         printed.push("json")
     }
     if printed.is_empty() {
