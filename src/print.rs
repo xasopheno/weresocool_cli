@@ -78,6 +78,17 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         )?;
         printed.push("json")
     }
+    if should_print(&["all", "stems"]) {
+        println!("{}", "printing .stems...");
+        InputType::Filename(&filename).make(
+            RenderType::Stems {
+                cli: true,
+                output_dir: output_dir.clone(),
+            },
+            None,
+        )?;
+        printed.push("stems")
+    }
     if printed.is_empty() {
         InputType::Filename(&filename).make(
             RenderType::Wav(WavType::Wav {

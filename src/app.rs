@@ -70,6 +70,12 @@ pub fn app() -> clap::App<'static, 'static> {
                         .help("print csv file"),
                 )
                 .arg(
+                    Arg::with_name("stems")
+                        .long("stems")
+                        .takes_value(false)
+                        .help("print stems as a zip"),
+                )
+                .arg(
                     Arg::with_name("sound")
                         .long("sound")
                         .short("s")
