@@ -1731,6 +1731,7 @@ dependencies = [
  "weresocool 0.6.0",
  "weresocool_error",
  "weresocool_instrument",
+ "zip",
 ]
 
 [[package]]

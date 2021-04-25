@@ -96,6 +96,26 @@ mod test {
         assert_same_bytes(expected_filename, written_filename);
     }
 
+    #[test]
+    fn it_prints_stems() {
+        let mut cmd = Command::new("cargo");
+
+        cmd.arg("run")
+            .arg("--release")
+            .arg("--")
+            .arg("print")
+            .arg("test_data/play.socool")
+            .arg("--output_dir")
+            .arg("/tmp")
+            .arg("--stems")
+            .assert()
+            .success();
+
+        let expected_filename = "test_data/play.socool.stems.zip";
+        let written_filename = "/tmp/play.socool.stems.zip";
+        assert_same_zip_contents(expected_filename, written_filename).unwrap();
+    }
+
     fn assert_same_wav_file(
         expected_filename: &str,
         written_filename: &str,
@@ -110,6 +130,34 @@ mod test {
             .zip(written_reader.samples::<f32>())
         {
             assert!(written_sample? == expected_sample?);
+        }
+
+        Ok(())
+    }
+
+    fn assert_same_zip_contents(
+        expected_filename: &str,
+        written_filename: &str,
+    ) -> zip::result::ZipResult<()> {
+        let written_read = std::io::Cursor::new(
+            std::fs::read(written_filename).expect("Something went wrong reading file"),
+        );
+        let mut written_zip = zip::ZipArchive::new(written_read)?;
+
+        let expected_read = std::io::Cursor::new(
+            std::fs::read(expected_filename).expect("Something went wrong reading file"),
+        );
+        let mut expected_zip = zip::ZipArchive::new(expected_read)?;
+        written_zip.extract(std::path::Path::new("/tmp/written_zip"))?;
+        expected_zip.extract(std::path::Path::new("/tmp/expected_zip"))?;
+
+        for (written_filename, expected_filename) in
+            written_zip.file_names().zip(expected_zip.file_names())
+        {
+            assert_same_bytes(
+                format!("/tmp/written_zip/{}", written_filename).as_str(),
+                format!("/tmp/expected_zip/{}", expected_filename).as_str(),
+            );
         }
 
         Ok(())

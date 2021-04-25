@@ -17,3 +17,4 @@ weresocool_error = { path = "../weresocool/error" }
 thiserror = "1.0.24"
 portaudio = "0.7.0"
 hound = "3.4.0"
+zip = "0.5.12"
