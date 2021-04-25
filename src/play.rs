@@ -17,9 +17,9 @@ pub enum Play {
 
 pub fn play(play_args: Option<&ArgMatches>, cwd: PathBuf, play: Play) -> Result<(), Error> {
     let filename = play_args
-        .ok_or(Error::Message("No play args".to_string()))?
+        .ok_or_else(|| Error::Message("No play args".to_string()))?
         .values_of("file")
-        .ok_or(Error::Message("No value of file".to_string()))?
+        .ok_or_else(|| Error::Message("No value of file".to_string()))?
         .collect::<Vec<_>>()
         .first()
         .expect("No filename")
@@ -72,5 +72,6 @@ fn play_watch(
     watch(filename, working_path, render_manager.clone())?;
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
     stream.start()?;
-    loop {}
+    std::thread::park();
+    Ok(())
 }

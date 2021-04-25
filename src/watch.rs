@@ -24,13 +24,10 @@ pub fn watch(
             let path = Path::new(&working_path).join(Path::new(&filename));
 
             watcher.watch(path, RecursiveMode::NonRecursive)?;
-            match rx.recv() {
-                Ok(_event) => {
-                    // println!("{:?}", event);
-                    let render_voices = match prepare_render_outside(
-                        Filename(&filename),
-                        Some(working_path.clone()),
-                    ) {
+            if let Ok(_event) = rx.recv() {
+                // println!("{:?}", event);
+                let render_voices =
+                    match prepare_render_outside(Filename(&filename), Some(working_path.clone())) {
                         Ok(result) => Some(result),
                         Err(error) => {
                             println!("{}", error);
@@ -38,11 +35,9 @@ pub fn watch(
                         }
                     };
 
-                    if let Some(voices) = render_voices {
-                        render_manager.lock().unwrap().push_render(voices);
-                    }
+                if let Some(voices) = render_voices {
+                    render_manager.lock().unwrap().push_render(voices);
                 }
-                Err(_) => {}
             }
         }
     });

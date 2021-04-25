@@ -6,7 +6,7 @@ use weresocool::interpretable::InputType;
 use weresocool::interpretable::Interpretable;
 
 pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
-    let args = print_args.ok_or(Error::Message("No print args".to_string()))?;
+    let args = print_args.ok_or_else(|| Error::Message("No print args".to_string()))?;
 
     let mut printed: Vec<&str> = vec![];
     let should_print = |target: &[&str]| -> bool {
@@ -26,14 +26,13 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         .to_string();
 
     let mut output_dir = PathBuf::new();
-    match args.values_of("output_dir") {
-        Some(values) => output_dir.push(values.collect::<Vec<_>>().first().expect("No Filename")),
-        None => {}
+    if let Some(values) = args.values_of("output_dir") {
+        output_dir.push(values.collect::<Vec<_>>().first().expect("No Filename"));
     };
 
     println!("Filename: {}", filename);
     if should_print(&["all", "wav", "sound"]) {
-        println!("{}", "printing .wav...");
+        println!("printing .wav...");
 
         InputType::Filename(&filename).make(
             RenderType::Wav(WavType::Wav {
@@ -45,7 +44,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         printed.push("wav")
     }
     if should_print(&["all", "mp3", "sound"]) {
-        println!("{}", "printing .mp3...");
+        println!("printing .mp3...");
 
         InputType::Filename(&filename).make(
             RenderType::Wav(WavType::Mp3 {
@@ -57,7 +56,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         printed.push("mp3")
     }
     if should_print(&["all", "csv"]) {
-        println!("{}", "printing .csv...");
+        println!("printing .csv...");
         InputType::Filename(&filename).make(
             RenderType::Csv1d {
                 cli: true,
@@ -68,7 +67,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         printed.push("csv")
     }
     if should_print(&["all", "json"]) {
-        println!("{}", "printing .json...");
+        println!("printing .json...");
         InputType::Filename(&filename).make(
             RenderType::Json4d {
                 cli: true,
@@ -79,7 +78,7 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
         printed.push("json")
     }
     if should_print(&["all", "stems"]) {
-        println!("{}", "printing .stems...");
+        println!("printing .stems...");
         InputType::Filename(&filename).make(
             RenderType::Stems {
                 cli: true,
@@ -97,9 +96,9 @@ pub fn print(print_args: Option<&ArgMatches>) -> Result<(), Error> {
             }),
             None,
         )?;
-        println!("{}", "printing .wav (default)...");
+        println!("printing .wav (default)...");
     }
 
-    println!("\t{}", "done");
+    println!("\tdone");
     Ok(())
 }
