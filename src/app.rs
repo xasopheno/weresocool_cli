@@ -16,9 +16,27 @@ pub fn app() -> clap::App<'static, 'static> {
             ),
         )
         .subcommand(
+            SubCommand::with_name("watch")
+                .alias("dev")
+                .help("Develop .socool file")
+                .arg(
+                    Arg::with_name("file")
+                        .multiple(false)
+                        .number_of_values(1)
+                        .index(1)
+                        .help("filename"),
+                ),
+        )
+        .subcommand(
             SubCommand::with_name("print")
                 .usage("weresocool print [FILENAME] [FLAGS]")
-                // .help("Print .socool file to mp3 or wav")
+                .arg(
+                    Arg::with_name("output_dir")
+                        .long("output_dir")
+                        .value_name("OUTPUT_DIR")
+                        .number_of_values(1)
+                        .help("output_dir"),
+                )
                 .arg(
                     Arg::with_name("file")
                         .value_name("FILENAME")
@@ -50,6 +68,12 @@ pub fn app() -> clap::App<'static, 'static> {
                         .long("json")
                         .takes_value(false)
                         .help("print csv file"),
+                )
+                .arg(
+                    Arg::with_name("stems")
+                        .long("stems")
+                        .takes_value(false)
+                        .help("print stems as a zip"),
                 )
                 .arg(
                     Arg::with_name("sound")

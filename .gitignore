@@ -1,1 +1,3 @@
 /target
+renders/
+*.DS_Store
