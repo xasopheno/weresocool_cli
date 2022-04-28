@@ -9,7 +9,9 @@ edition = "2018"
 [dependencies]
 assert_cmd = "1.0.3"
 clap = "2.33.3"
-notify = "4.0.15"
+# notify = "4.0.15"
+crossbeam-channel = "0.4.0"
+notify = "5.0.0-pre.14"
 predicates = "1.0.7"
 weresocool = { path = "../weresocool" }
 weresocool_instrument = { path = "../weresocool/instrument" }
