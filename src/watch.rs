@@ -23,8 +23,10 @@ pub fn watch(
             let path = Path::new(&working_path).join(Path::new(&filename));
 
             watcher.watch(path.as_ref(), RecursiveMode::NonRecursive)?;
-            if let Ok(event) = rx.recv() {
-                println!("{:?}", event);
+            if let Ok(_event) = rx.recv() {
+                std::thread::sleep(std::time::Duration::from_millis(100));
+
+                // println!("{:?}", event);
                 let render_voices =
                     match prepare_render_outside(Filename(&filename), Some(working_path.clone())) {
                         Ok(result) => Some(result),
