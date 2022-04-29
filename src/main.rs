@@ -10,7 +10,7 @@ use crate::play::{
 use notify::Error as NotifyError;
 use std::env;
 use thiserror::Error;
-use weresocool::ui::were_so_cool_logo;
+use weresocool_core::ui::were_so_cool_logo;
 use weresocool_error::Error as WscError;
 
 #[derive(Error, Debug)]

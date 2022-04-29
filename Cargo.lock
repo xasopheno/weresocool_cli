@@ -1261,11 +1261,7 @@ checksum = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
 
 [[package]]
 name = "reverb"
-version = "0.3.0"
-
-[[package]]
-name = "ring_buffer"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "rustc-demangle"
@@ -1296,7 +1292,7 @@ dependencies = [
 
 [[package]]
 name = "scop"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "indexmap",
  "serde",
@@ -1619,7 +1615,52 @@ checksum = "d9a543ae66aa233d14bb765ed9af4a33e81b8b58d1584cf1b47ff8cd0b9e4489"
 
 [[package]]
 name = "weresocool"
-version = "0.6.0"
+version = "1.0.0"
+dependencies = [
+ "assert_cmd",
+ "clap",
+ "crossbeam-channel 0.4.4",
+ "hound",
+ "notify",
+ "portaudio",
+ "thiserror",
+ "weresocool_core",
+ "weresocool_error",
+ "weresocool_instrument",
+ "zip",
+]
+
+[[package]]
+name = "weresocool_analyze"
+version = "1.0.0"
+dependencies = [
+ "weresocool_shared",
+]
+
+[[package]]
+name = "weresocool_ast"
+version = "1.0.0"
+dependencies = [
+ "colored",
+ "csv",
+ "indexmap",
+ "meval",
+ "num-integer",
+ "num-rational",
+ "num-traits",
+ "polynomials",
+ "pretty_assertions",
+ "rand",
+ "scop",
+ "serde",
+ "weresocool_error",
+ "weresocool_ring_buffer",
+ "weresocool_shared",
+]
+
+[[package]]
+name = "weresocool_core"
+version = "1.0.0"
 dependencies = [
  "bytes",
  "clap",
@@ -1640,7 +1681,6 @@ dependencies = [
  "portaudio",
  "rand",
  "rayon",
- "ring_buffer",
  "scop",
  "serde",
  "serde_derive",
@@ -1654,58 +1694,14 @@ dependencies = [
  "weresocool_instrument",
  "weresocool_lame",
  "weresocool_parser",
+ "weresocool_ring_buffer",
  "weresocool_shared",
  "zip",
-]
-
-[[package]]
-name = "weresocool"
-version = "1.0.0"
-dependencies = [
- "assert_cmd",
- "clap",
- "crossbeam-channel 0.4.4",
- "hound",
- "notify",
- "portaudio",
- "thiserror",
- "weresocool 0.6.0",
- "weresocool_error",
- "weresocool_instrument",
- "zip",
-]
-
-[[package]]
-name = "weresocool_analyze"
-version = "0.1.0"
-dependencies = [
- "weresocool_shared",
-]
-
-[[package]]
-name = "weresocool_ast"
-version = "0.5.0"
-dependencies = [
- "colored",
- "csv",
- "indexmap",
- "meval",
- "num-integer",
- "num-rational",
- "num-traits",
- "polynomials",
- "pretty_assertions",
- "rand",
- "ring_buffer",
- "scop",
- "serde",
- "weresocool_error",
- "weresocool_shared",
 ]
 
 [[package]]
 name = "weresocool_error"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "csv",
  "failure",
@@ -1721,7 +1717,7 @@ dependencies = [
 
 [[package]]
 name = "weresocool_instrument"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "num-rational",
  "num-traits",
@@ -1738,7 +1734,7 @@ dependencies = [
 
 [[package]]
 name = "weresocool_lame"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "failure",
  "failure_derive",
@@ -1748,7 +1744,7 @@ dependencies = [
 
 [[package]]
 name = "weresocool_parser"
-version = "0.5.0"
+version = "1.0.0"
 dependencies = [
  "colored",
  "indexmap",
@@ -1765,8 +1761,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "weresocool_ring_buffer"
+version = "1.0.0"
+dependencies = [
+ "weresocool_shared",
+]
+
+[[package]]
 name = "weresocool_shared"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "float-cmp",
  "num-rational",

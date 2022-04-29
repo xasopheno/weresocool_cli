@@ -11,7 +11,7 @@ assert_cmd = "1.0.3"
 clap = "2.33.3"
 crossbeam-channel = "0.4.0"
 notify = "5.0.0-pre.14"
-weresocool = { path = "../weresocool" }
+weresocool_core = { path = "../weresocool" }
 weresocool_instrument = { path = "../weresocool/instrument" }
 weresocool_error = { path = "../weresocool/error" }
 thiserror = "1.0.24"
