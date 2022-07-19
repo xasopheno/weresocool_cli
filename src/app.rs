@@ -52,6 +52,12 @@ pub fn app() -> clap::App<'static, 'static> {
                         .help("print mp3 file"),
                 )
                 .arg(
+                    Arg::with_name("oggvorbis")
+                        .long("oggvorbis")
+                        .takes_value(false)
+                        .help("print oggvorbis file"),
+                )
+                .arg(
                     Arg::with_name("wav")
                         .long("wav")
                         .takes_value(false)

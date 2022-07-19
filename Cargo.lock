@@ -232,9 +232,9 @@ dependencies = [
 
 [[package]]
 name = "crossbeam-channel"
-version = "0.5.1"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06ed27e177f16d65f0f0c22a213e17c696ace5dd64b14258b52f9417ccb52db4"
+checksum = "4c02a4d71819009c192cf4872265391563fd6a84c81ff2c0f2a7026ca4c1d85c"
 dependencies = [
  "cfg-if 1.0.0",
  "crossbeam-utils 0.8.3",
@@ -362,6 +362,12 @@ name = "doc-comment"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fea41bba32d969b513997752735605054bc0dfa92b4c56bf1189f2e174be7a10"
+
+[[package]]
+name = "drain-while"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0285eb0b1d8610e71efc2b047ae006207c8596c0fce812b5871c9a28ee61db0b"
 
 [[package]]
 name = "either"
@@ -560,6 +566,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "gcc"
+version = "0.3.55"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8f5f3913fa0bfe7ee1fd8248b6b9f42a5af4b9d65ec2dd2c3c26132b950ecfc2"
+
+[[package]]
 name = "getrandom"
 version = "0.1.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -657,9 +669,9 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.10.0"
+version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37d572918e350e82412fe766d24b15e6682fb2ed2bbe018280caa810397cb319"
+checksum = "a9a9d19fa1e79b6215ff29b9d6880b706147f16e9b1dbb1e4e5947b5b02bc5e3"
 dependencies = [
  "either",
 ]
@@ -835,7 +847,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d13c22db70a63592e098fb51735bab36646821e6389a0ba171f3549facdf0b74"
 dependencies = [
  "bitflags 1.2.1",
- "crossbeam-channel 0.5.1",
+ "crossbeam-channel 0.5.5",
  "filetime",
  "fsevent-sys",
  "inotify",
@@ -960,6 +972,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a9a7ab5d64814df0fe4a4b5ead45ed6c5f181ee3ff04ba344313a6c80446c5d4"
 
 [[package]]
+name = "ogg-sys"
+version = "0.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a95b8c172e17df1a41bf8d666301d3b2c4efeb90d9d0415e2a4dc0668b35fdb2"
+dependencies = [
+ "gcc",
+ "libc",
+ "pkg-config",
+]
+
+[[package]]
+name = "opmap"
+version = "0.1.0"
+dependencies = [
+ "drain-while",
+]
+
+[[package]]
 name = "output_vt100"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -980,7 +1010,7 @@ version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ff5751d87f7c00ae6403eb1fcbba229b9c76c9a30de8c1cf87182177b168cea2"
 dependencies = [
- "crossbeam-channel 0.5.1",
+ "crossbeam-channel 0.5.5",
  "libc",
  "time",
  "winapi",
@@ -1207,7 +1237,7 @@ version = "1.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d78120e2c850279833f1dd3582f730c4ab53ed95aeaaaa862a2a5c71b1656d8e"
 dependencies = [
- "crossbeam-channel 0.5.1",
+ "crossbeam-channel 0.5.5",
  "crossbeam-deque",
  "crossbeam-utils 0.8.3",
  "lazy_static",
@@ -1522,6 +1552,31 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1bddf1187be692e79c5ffeab891132dfb0f236ed36a43c7ed39f1165ee20191"
 
 [[package]]
+name = "vorbis-encoder"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fb66bcdde056dd230991bb86669a1269778fe8ad1f6cee403428ac7985391bc"
+dependencies = [
+ "gcc",
+ "libc",
+ "ogg-sys",
+ "pkg-config",
+ "vorbis-sys",
+]
+
+[[package]]
+name = "vorbis-sys"
+version = "0.0.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "729e1f15395850b4e6d19ca0cd1d42ef44707503a53b69d40ff49182b3c5589d"
+dependencies = [
+ "gcc",
+ "libc",
+ "ogg-sys",
+ "pkg-config",
+]
+
+[[package]]
 name = "wait-timeout"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1665,6 +1720,7 @@ dependencies = [
  "bytes",
  "clap",
  "colored",
+ "crossbeam-channel 0.5.5",
  "csv",
  "difference",
  "env_logger",
@@ -1677,6 +1733,7 @@ dependencies = [
  "num 0.3.1",
  "num-complex",
  "num-rational",
+ "opmap",
  "pbr",
  "portaudio",
  "rand",
@@ -1696,6 +1753,7 @@ dependencies = [
  "weresocool_parser",
  "weresocool_ring_buffer",
  "weresocool_shared",
+ "weresocool_vorbis",
  "zip",
 ]
 
@@ -1773,6 +1831,15 @@ version = "1.0.0"
 dependencies = [
  "float-cmp",
  "num-rational",
+]
+
+[[package]]
+name = "weresocool_vorbis"
+version = "0.1.0"
+dependencies = [
+ "hound",
+ "itertools",
+ "vorbis-encoder",
 ]
 
 [[package]]

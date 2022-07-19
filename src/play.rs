@@ -41,6 +41,7 @@ fn play_once(render_voices: Vec<RenderVoice>) -> Result<(), Error> {
     let (tx, rx) = std::sync::mpsc::channel::<bool>();
     let render_manager = Arc::new(Mutex::new(RenderManager::init(
         render_voices,
+        None,
         // Option<KillChannel>
         Some(tx),
         // play once
@@ -68,7 +69,12 @@ fn play_watch(
     working_path: PathBuf,
     render_voices: Vec<RenderVoice>,
 ) -> Result<(), Error> {
-    let render_manager = Arc::new(Mutex::new(RenderManager::init(render_voices, None, false)));
+    let render_manager = Arc::new(Mutex::new(RenderManager::init(
+        render_voices,
+        None,
+        None,
+        false,
+    )));
     watch(filename, working_path, render_manager.clone())?;
     let mut stream = real_time_render_manager(Arc::clone(&render_manager))?;
     stream.start()?;
