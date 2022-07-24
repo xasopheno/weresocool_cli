@@ -1672,16 +1672,44 @@ checksum = "d9a543ae66aa233d14bb765ed9af4a33e81b8b58d1584cf1b47ff8cd0b9e4489"
 name = "weresocool"
 version = "1.0.0"
 dependencies = [
- "assert_cmd",
+ "bytes",
  "clap",
- "crossbeam-channel 0.4.4",
+ "colored",
+ "crossbeam-channel 0.5.5",
+ "csv",
+ "difference",
+ "env_logger",
+ "failure",
+ "failure_derive",
+ "float-cmp",
+ "futures",
  "hound",
- "notify",
+ "indexmap",
+ "num 0.3.1",
+ "num-complex",
+ "num-rational",
+ "opmap",
+ "pbr",
  "portaudio",
- "thiserror",
+ "rand",
+ "rayon",
+ "scop",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "term",
+ "test-generator",
+ "uuid",
+ "weresocool_analyze",
+ "weresocool_ast",
  "weresocool_core",
  "weresocool_error",
  "weresocool_instrument",
+ "weresocool_lame",
+ "weresocool_parser",
+ "weresocool_ring_buffer",
+ "weresocool_shared",
+ "weresocool_vorbis",
  "zip",
 ]
 
@@ -1711,6 +1739,23 @@ dependencies = [
  "weresocool_error",
  "weresocool_ring_buffer",
  "weresocool_shared",
+]
+
+[[package]]
+name = "weresocool_cli"
+version = "1.0.0"
+dependencies = [
+ "assert_cmd",
+ "clap",
+ "crossbeam-channel 0.4.4",
+ "hound",
+ "notify",
+ "portaudio",
+ "thiserror",
+ "weresocool",
+ "weresocool_error",
+ "weresocool_instrument",
+ "zip",
 ]
 
 [[package]]

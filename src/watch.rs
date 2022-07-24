@@ -5,9 +5,9 @@ use std::path::PathBuf;
 use std::sync::mpsc::channel;
 use std::sync::Arc;
 use std::sync::Mutex;
-use weresocool_core::interpretable::InputType::Filename;
-use weresocool_core::manager::prepare_render_outside;
-use weresocool_core::manager::RenderManager;
+use weresocool::core::interpretable::InputType::Filename;
+use weresocool::core::manager::prepare_render_outside;
+use weresocool::core::manager::RenderManager;
 
 pub fn watch(
     filename: String,

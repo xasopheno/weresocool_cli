@@ -1,8 +1,8 @@
 [package]
-name = "weresocool"
+name = "weresocool_cli"
 version = "1.0.0"
 authors = ["Danny Meyer <danny@xasopheno.com>"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -11,7 +11,7 @@ assert_cmd = "1.0.3"
 clap = "2.33.3"
 crossbeam-channel = "0.4.0"
 notify = "5.0.0-pre.14"
-weresocool_core = { path = "../weresocool" }
+weresocool = { path = "../weresocool", package = 'weresocool' }
 weresocool_instrument = { path = "../weresocool/instrument" }
 weresocool_error = { path = "../weresocool/error" }
 thiserror = "1.0.24"
